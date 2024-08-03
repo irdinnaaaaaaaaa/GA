@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Transaction History</h1>
+            <a href="dashboard.html" class="btn btn-logout">Back to Dashboard</a>
+        </header>
+        
+        <section class="transactions">
+            <div class="wallet-header">
+                <h2>E Wallets</h2>
+                <p class="card-number">4129 2058 4536 9721</p>
+                <button class="btn btn-highlight" onclick="window.location.href='addvalue.html';">Add Value</button>
+            </div>
+            <div class="transaction-summary">
+                <p>Available Balance: <span class="highlight" id="availableBalance">2500 MYR</span></p>
+            </div>
+            <div class="transaction-list" id="transactionList">
+                <!-- Dynamic transaction items will be inserted here -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            // Retrieve new balance from localStorage if available
+            const newBalance = localStorage.getItem('newBalance');
+            if (newBalance) {
+                document.getElementById('availableBalance').textContent = newBalance + ' MYR';
+            }
+
+            // Retrieve transactions from localStorage
+            const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+            const transactionList = document.getElementById('transactionList');
+            transactions.forEach(transaction => {
+                const transactionItem = document.createElement('div');
+                transactionItem.classList.add('transaction-item');
+
+                const date = document.createElement('p');
+                date.classList.add('date');
+                date.textContent = transaction.date;
+
+                const description = document.createElement('p');
+                description.classList.add('description');
+                description.textContent = transaction.description;
+
+                const amount = document.createElement('p');
+                amount.classList.add('amount');
+                amount.classList.add(transaction.type);
+                amount.textContent = (transaction.type === 'positive' ? '+' : '-') + transaction.amount;
+
+                transactionItem.appendChild(date);
+                transactionItem.appendChild(description);
+                transactionItem.appendChild(amount);
+
+                transactionList.appendChild(transactionItem);
+            });
+        });
+    </script>
+</body>
+</html>
+
+

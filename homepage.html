@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Global</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-custom {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .hero-section {
+    background: url('homepage.png') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure overlay is behind content */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensure content is above overlay */
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for better readability */
+}
+
+.hero-tagline {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Add text shadow for better readability */
+}
+
+.btn-custom {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+}
+        .features-section {
+            padding: 60px 20px;
+            background-color: #ffffff;
+        }
+        .feature-item {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .feature-item img {
+            max-width: 80px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .feature-description {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        .cta-section {
+            background-color: #e9ecef;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            font-size: 1.25rem;
+            padding: 10px 30px;
+        }
+        .conversion-section {
+            background-color: #f8f9fa;
+            padding: 60px 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .conversion-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .conversion-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .conversion-form {
+            display: grid;
+            gap: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .form-control, 
+        .form-select {
+            border-radius: 10px; /* Increased border-radius for rounded appearance */
+            border: 1px solid #ced4da;
+            padding: 10px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 10px; /* Rounded button corners */
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            cursor: pointer;
+        }
+        .conversion-info {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+        }
+        .conversion-info p {
+            margin: 0;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="applogo.png" alt="Go global" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="homepage.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="Aboutus.html">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="register.html">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="login.html">Log in</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <button class="btn btn-outline-success btn-custom" type="button" onclick="window.location.href='login.html'">Login</button>
+                        <button class="btn btn-outline-danger btn-custom" type="button" onclick="window.location.href='register.html'">Register</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Go Global</h1>
+            <p class="hero-tagline">Sending smiles one transfer at a time</p>
+            <a href="register.html" class="btn btn-primary btn-custom">Get Started</a>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 feature-item">
+                    <img src="lowcost.png" alt="Low-Cost Transfers">
+                    <h3 class="feature-title">Low-Cost Transfers</h3>
+                    <p class="feature-description">No hidden fees. Transparent pricing for your peace of mind.</p>
+                </div>
+                <div class="col-md-4 feature-item">
+                    <img src="fast&efficient.png" alt="Fast & Easy">
+                    <h3 class="feature-title">Fast & Easy</h3>
+                    <p class="feature-description">Transfers completed immediately or the same day. Simple and hassle-free.</p>
+                </div>
+                <div class="col-md-4 feature-item">
+                    <img src="globalreach.png" alt="Global Reach">
+                    <h3 class="feature-title">Global Reach</h3>
+                    <p class="feature-description">Send money worldwide with ease. Reach your loved ones wherever they are.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="conversion-section">
+        <div class="container conversion-container">
+            <h2 class="conversion-title">Convert Your Money</h2>
+            <form class="conversion-form">
+                <div class="form-group">
+                    <label for="amount" class="form-label">Amount</label>
+                    <input type="number" id="amount" class="form-control" placeholder="Enter amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="fromCurrency" class="form-label">From Currency</label>
+                    <select id="fromCurrency" class="form-select">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <!-- Add more currencies as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="toCurrency" class="form-label">To Currency</label>
+                    <select id="toCurrency" class="form-select">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <!-- Add more currencies as needed -->
+                    </select>
+                </div>
+
+                <!-- Conversion Information -->
+                <div class="conversion-info">
+                    <p><strong>Flat Fee:</strong> <span id="flatFee">$5.00</span></p>
+                    <p><strong>Guaranteed Rate:</strong> <span id="guaranteedRate">1 USD = 0.85 EUR</span></p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-outline-primary" id="comparePrices">Compare Prices</button>
+                    <button type="submit" class="btn btn-primary">Send Money Now</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        const rates = {
+            'USD-EUR': { flatFee: '$5.00', rate: '1 USD = 0.85 EUR' },
+            'USD-GBP': { flatFee: '$7.00', rate: '1 USD = 0.75 GBP' },
+            'EUR-USD': { flatFee: '$5.50', rate: '1 EUR = 1.18 USD' },
+            'EUR-GBP': { flatFee: '$6.00', rate: '1 EUR = 0.88 GBP' },
+            'GBP-USD': { flatFee: '$7.50', rate: '1 GBP = 1.33 USD' },
+            'GBP-EUR': { flatFee: '$6.50', rate: '1 GBP = 1.14 EUR' }
+            // Add more currency pairs and their respective fees and rates
+        };
+
+        const fromCurrency = document.getElementById('fromCurrency');
+        const toCurrency = document.getElementById('toCurrency');
+        const flatFee = document.getElementById('flatFee');
+        const guaranteedRate = document.getElementById('guaranteedRate');
+
+        function updateConversionInfo() {
+            const from = fromCurrency.value;
+            const to = toCurrency.value;
+            const key = `${from}-${to}`;
+
+            if (rates[key]) {
+                flatFee.textContent = rates[key].flatFee;
+                guaranteedRate.textContent = rates[key].rate;
+            } else {
+                flatFee.textContent = 'N/A';
+                guaranteedRate.textContent = 'N/A';
+            }
+        }
+
+        fromCurrency.addEventListener('change', updateConversionInfo);
+        toCurrency.addEventListener('change', updateConversionInfo);
+
+        // Initialize the conversion info on page load
+        updateConversionInfo();
+    </script>
+</body>
+</html>
+

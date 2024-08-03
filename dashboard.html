@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Account Overview</h1>
+            <div class="header-buttons">
+                <a href="sendmoney.html" class="btn btn-sendmoney">Send</a>
+                <button class="btn">Request</button>
+                <button class="btn">Refer a Friend</button>
+                <a href="transactionhistory.html" class="btn btn-transactionhistory">Transaction History</a>
+                <a href="homepage.html" class="btn btn-logout">Log Out</a>
+                <div class="notification-bell">
+                    <img src="bell.png" alt="Notifications">
+                </div>
+            </div>
+        </header>
+        
+        <div class="account-summary" id="accountSummary">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+        
+        <section class="transactions">
+            <div class="wallet-header">
+                <h2>E Wallets</h2>
+                <p class="card-number">4129 2058 4536 9721</p>
+                <button class="btn btn-highlight" onclick="window.location.href='addvalue.html';">Add Value</button>
+            </div>
+            <div class="transaction-summary">
+                <p>Available Balance: <span class="highlight" id="availableBalance">2500 MYR</span></p>
+            </div>
+            <div class="transaction-list">
+                <div class="transaction-item">
+                    <p class="date">23 May</p>
+                    <p class="description">Debit Purchase XX-9721 NTUC</p>
+                    <p class="amount negative">-17.50</p>
+                </div>
+                <div class="transaction-item">
+                    <p class="date">19 May</p>
+                    <p class="description">Payment Transfer from Pocoyo</p>
+                    <p class="amount positive">17.50</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            // Retrieve new balance from localStorage if available
+            const newBalance = localStorage.getItem('newBalance');
+            if (newBalance) {
+                document.getElementById('availableBalance').textContent = newBalance + ' MYR';
+                localStorage.removeItem('newBalance'); // Clear the stored value after use
+            }
+        });
+
+        let balance = {
+            "SGD": 0,
+            "KRW": 0,
+            "MYR": 0,
+            "Yuan": 0,
+            "Yen": 0
+        };
+
+        let selectCurrency = document.getElementById("currencyChoice");
+        let balanceAmount = document.getElementById("Bamount");
+        let getCurrency = document.getElementById("getAmount");
+        document.getElementById("Bamount").textContent = "S$" + balance["SGD"];
+        getCurrency.addEventListener("click", (event) => {
+            let selectedCurrency = selectCurrency.options[selectCurrency.selectedIndex].value;
+
+            if (selectedCurrency == "SGD") {
+                balanceAmount.textContent = "S$" + balance["SGD"];
+            } else if (selectedCurrency == "KRW") {
+                balanceAmount.textContent = "₩" + balance["KRW"];
+            } else if (selectedCurrency == "MYR") {
+                balanceAmount.textContent = "RM" + balance["MYR"];
+            } else if (selectedCurrency == "Yuan") {
+                balanceAmount.textContent = "CN¥" + balance["Yuan"];
+            } else {
+                balanceAmount.textContent = "JP¥" + balance["Yen"];
+            }
+
+            // Add a static "Add More Account" card
+            let addMoreCard = document.createElement('div');
+            addMoreCard.classList.add('account-card');
+            addMoreCard.innerHTML = `
+                <div class="account-icon"><img src="addaccount.png" alt="Add Account"></div>
+                <div class="account-details">
+                    <p><a href="addmoreaccount.html">Add More Account</a></p>
+                </div>
+            `;
+            accountSummary.appendChild(addMoreCard);
+
+            // Add another static "E Wallet" card
+            let eWalletCard = document.createElement('div');
+            eWalletCard.classList.add('account-card');
+            eWalletCard.innerHTML = `
+                <div class="account-icon"><img src="ewallet.png" alt="E Wallet"></div>
+                <div class="account-details">
+                    <p>E Wallet</p>
+                    <p class="balance">1500 MYR</p>
+                </div>
+            `;
+            accountSummary.appendChild(eWalletCard);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top-Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+        }
+        .header .back-button {
+            margin-right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .header .title {
+            flex-grow: 1;
+        }
+        .card-details {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card-details p {
+            margin: 5px 0;
+        }
+        .top-up-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .top-up-options button {
+            flex: 1 1 calc(33.333% - 10px);
+            padding: 15px;
+            font-size: 18px;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            background-color: white;
+            color: #007bff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .top-up-options button:hover,
+        .top-up-options button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .form-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-section h1 {
+            margin-bottom: 10px;
+        }
+        .form-section p {
+            margin-bottom: 20px;
+        }
+        .payment-methods {
+            margin-bottom: 20px;
+        }
+        .payment-methods label {
+            margin-right: 10px;
+        }
+        .payment-methods img {
+            vertical-align: middle;
+            margin-left: 5px;
+            width: 30px; /* Adjusted image size */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .summary {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-custom {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .popup p {
+            margin-bottom: 10px;
+        }
+        .popup .close-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        .popup .close-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button" onclick="window.location.href='dashboard.html';">&#8592;</div>
+            <div class="title">Top-Up</div>
+        </div>
+        
+        <div class="card-details">
+            <p>Card Number: 4129 2058 4536 9721</p>
+        </div>
+
+        <div class="top-up-options">
+            <button data-value="10">10 MYR</button>
+            <button data-value="50">50 MYR</button>
+            <button data-value="100">100 MYR</button>
+        </div>
+
+        <div class="form-section">
+            <h1>Top-Up Amount</h1>
+            <p>Please enter the top-up amount:</p>
+            <input type="number" id="topUpAmount" placeholder="Enter amount">
+        </div>
+
+        <div class="payment-methods">
+            <label>Select Payment Method:</label>
+            <input type="radio" name="paymentMethod" value="Visa" id="visa">
+            <label for="visa">
+                <img src="visa.png" alt="Visa">
+            </label>
+            <input type="radio" name="paymentMethod" value="Paypal" id="paypal">
+            <label for="paypal">
+                <img src="paypal.png" alt="Paypal">
+            </label>
+            <input type="radio" name="paymentMethod" value="applepay" id="applepay">
+            <label for="alipay">
+                <img src="applepay.png" alt="Applepay">
+            </label>
+        </div>
+
+        <div class="summary">
+            <p>Total Top-Up Amount: <span id="totalTopUpAmount">0 MYR</span></p>
+            <button class="btn-custom btn-primary" onclick="submitTopUp()">Top-Up</button>
+        </div>
+    </div>
+
+    <div class="popup" id="successPopup">
+        <p>Top-up Successful!</p>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        const topUpOptions = document.querySelectorAll('.top-up-options button');
+        const topUpAmountInput = document.getElementById('topUpAmount');
+        const totalTopUpAmount = document.getElementById('totalTopUpAmount');
+        let selectedAmount = 0;
+
+        topUpOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                topUpOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                selectedAmount = parseInt(option.getAttribute('data-value'));
+                totalTopUpAmount.textContent = selectedAmount + ' MYR';
+                topUpAmountInput.value = selectedAmount;
+            });
+        });
+
+        topUpAmountInput.addEventListener('input', () => {
+            selectedAmount = parseInt(topUpAmountInput.value);
+            totalTopUpAmount.textContent = selectedAmount + ' MYR';
+        });
+
+        function submitTopUp() {
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+            if (!paymentMethod) {
+                alert('Please select a payment method.');
+                return;
+            }
+
+            const currentBalance = parseInt(localStorage.getItem('newBalance') || '2500');
+            const newBalance = currentBalance + selectedAmount;
+            localStorage.setItem('newBalance', newBalance.toString());
+
+            // Store transaction details
+            const transaction = {
+                date: new Date().toLocaleDateString(),
+                description: `Top-up via ${paymentMethod.value}`,
+                amount: selectedAmount,
+                type: 'positive'
+            };
+
+            let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+            transactions.push(transaction);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+
+            document.getElementById('successPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('successPopup').style.display = 'none';
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>
+
